@@ -24,16 +24,24 @@ public class UpdateEmployeeSeatService {
         this.seatRepository = seatRepository;
     }
 
-
+    private static boolean isCancelSeatInput(Long seatId) {
+        return seatId == -1L;
+    }
     @Transactional
     public void execute(List<UpdateEmployeeSeatInput> updateEmployeeSeatInputs) {
         for(UpdateEmployeeSeatInput updateEmployeeSeatInput : updateEmployeeSeatInputs) {
             Optional<Employee> currentEmployee = employeeRepository.findById(updateEmployeeSeatInput.getEmployeeId());
-            Optional<Seat> currentSeatingChart = seatRepository.findById(updateEmployeeSeatInput.getSeatId());
             if(!currentEmployee.isPresent()) throw new RuntimeException("employee with id "+ updateEmployeeSeatInput.getEmployeeId() +" not found");
-            if(!currentSeatingChart.isPresent()) throw new RuntimeException("seat with id "+ updateEmployeeSeatInput.getSeatId() +" not found");
 
-            currentEmployee.get().setSeat(currentSeatingChart.get());
+            if(isCancelSeatInput(updateEmployeeSeatInput.getSeatId())) {
+                currentEmployee.get().setSeat(null);
+            }
+            else {
+                Optional<Seat> currentSeatingChart = seatRepository.findById(updateEmployeeSeatInput.getSeatId());
+                if(!currentSeatingChart.isPresent()) throw new RuntimeException("seat with id "+ updateEmployeeSeatInput.getSeatId() +" not found");
+                currentEmployee.get().setSeat(currentSeatingChart.get());
+            }
+
             employeeRepository.save(currentEmployee.get());
         }
     }

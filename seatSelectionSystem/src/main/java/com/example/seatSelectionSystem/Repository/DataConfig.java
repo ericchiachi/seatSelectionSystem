@@ -11,10 +11,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Configuration
-public class EmployeeConfig {
+public class DataConfig {
     private final SeatRepository seatRepository;
 
-    public EmployeeConfig(SeatRepository seatRepository) {
+    public DataConfig(SeatRepository seatRepository) {
         this.seatRepository = seatRepository;
     }
 
