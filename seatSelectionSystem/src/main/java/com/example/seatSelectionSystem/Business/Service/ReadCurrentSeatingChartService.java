@@ -1,12 +1,9 @@
 package com.example.seatSelectionSystem.Business.Service;
 
 import com.example.seatSelectionSystem.Business.Entity.Seat;
-import com.example.seatSelectionSystem.Business.Output.EmployeeOutput;
 import com.example.seatSelectionSystem.Business.Output.EmployeeSeatOutput;
-import com.example.seatSelectionSystem.Repository.DTO.SeatWithEmployeeIdDTO;
 import com.example.seatSelectionSystem.Repository.SeatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

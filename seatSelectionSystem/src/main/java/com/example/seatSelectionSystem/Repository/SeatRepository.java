@@ -1,7 +1,6 @@
 package com.example.seatSelectionSystem.Repository;
 
 import com.example.seatSelectionSystem.Business.Entity.Seat;
-import com.example.seatSelectionSystem.Repository.DTO.SeatWithEmployeeIdDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

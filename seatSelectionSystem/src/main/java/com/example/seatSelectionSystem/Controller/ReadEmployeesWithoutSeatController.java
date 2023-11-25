@@ -1,7 +1,7 @@
 package com.example.seatSelectionSystem.Controller;
 
-import com.example.seatSelectionSystem.Business.Service.EmployeeService;
 import com.example.seatSelectionSystem.Business.Output.EmployeeOutput;
+import com.example.seatSelectionSystem.Business.Service.ReadEmployeeWithoutSeatService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,15 +15,17 @@ import java.util.List;
 @RestController
 public class ReadEmployeesWithoutSeatController {
     private final ObjectMapper objectMapper = new ObjectMapper();
-    private final EmployeeService employeeService;
+    private final ReadEmployeeWithoutSeatService readEmployeeWithoutSeatService;
+
+    public ReadEmployeesWithoutSeatController(ReadEmployeeWithoutSeatService readEmployeeWithoutSeatService) {
+        this.readEmployeeWithoutSeatService = readEmployeeWithoutSeatService;
+    }
 
     @Autowired
-    public ReadEmployeesWithoutSeatController(EmployeeService employeeService) {
-        this.employeeService = employeeService;
-    }
+
     @GetMapping(path = "api/v1/employee")
     public ResponseEntity<String> readEmployeesWithoutSeat() {
-        List<EmployeeOutput> executionResult = employeeService.getEmployeesWithoutSeat();
+        List<EmployeeOutput> executionResult = readEmployeeWithoutSeatService.execute();
         String returnData = null;
         try {
             returnData = mapOutputToJson(executionResult);

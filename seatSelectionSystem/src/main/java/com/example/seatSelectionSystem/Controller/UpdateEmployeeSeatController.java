@@ -1,6 +1,6 @@
 package com.example.seatSelectionSystem.Controller;
 
-import com.example.seatSelectionSystem.Business.Service.EmployeeService;
+import com.example.seatSelectionSystem.Business.Service.UpdateEmployeeSeatService;
 import com.example.seatSelectionSystem.Business.Input.UpdateEmployeeSeatInput;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,10 +11,10 @@ import java.util.Map;
 
 @RestController
 public class UpdateEmployeeSeatController {
-    private final EmployeeService employeeService;
+    private final UpdateEmployeeSeatService updateEmployeeSeatService;
     @Autowired
-    public UpdateEmployeeSeatController(EmployeeService employeeService) {
-        this.employeeService = employeeService;
+    public UpdateEmployeeSeatController(UpdateEmployeeSeatService updateEmployeeSeatService) {
+        this.updateEmployeeSeatService = updateEmployeeSeatService;
     }
 
     @PostMapping(path = "api/v1/employee/seat")
@@ -27,7 +27,7 @@ public class UpdateEmployeeSeatController {
             executeTargets.add(updateEmployeeSeatInput);
         }
 
-        this.employeeService.updateEmployeeSeat(executeTargets);
+        this.updateEmployeeSeatService.execute(executeTargets);
     }
 
 }
