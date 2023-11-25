@@ -9,7 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table
-public class SeatingChart {
+public class Seat {
     @Id
     @Getter
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +25,7 @@ public class SeatingChart {
     @Setter
     private int seatNumber;
 
-    public SeatingChart(int floorNumber, int seatNumber) {
+    public Seat(int floorNumber, int seatNumber) {
         this.floorNumber = floorNumber;
         this.seatNumber = seatNumber;
     }

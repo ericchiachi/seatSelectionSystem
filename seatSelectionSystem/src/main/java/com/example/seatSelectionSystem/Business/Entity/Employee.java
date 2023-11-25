@@ -33,7 +33,7 @@ public class Employee {
     @JoinColumn(name = "FLOOR_SEAT_SEQ", unique = true, nullable = true)
     @Getter
     @Setter
-    private SeatingChart seat;
+    private Seat seat;
 
     public Employee(String name, String email) {
         this.name = name;

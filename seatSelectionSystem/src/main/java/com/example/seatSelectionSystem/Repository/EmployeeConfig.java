@@ -1,7 +1,7 @@
 package com.example.seatSelectionSystem.Repository;
 
 import com.example.seatSelectionSystem.Business.Entity.Employee;
-import com.example.seatSelectionSystem.Business.Entity.SeatingChart;
+import com.example.seatSelectionSystem.Business.Entity.Seat;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,10 +12,10 @@ import java.util.stream.Collectors;
 
 @Configuration
 public class EmployeeConfig {
-    private final SeatingChartRepository seatingChartRepository;
+    private final SeatRepository seatRepository;
 
-    public EmployeeConfig(SeatingChartRepository seatingChartRepository) {
-        this.seatingChartRepository = seatingChartRepository;
+    public EmployeeConfig(SeatRepository seatRepository) {
+        this.seatRepository = seatRepository;
     }
 
     // Demo data
@@ -37,10 +37,10 @@ public class EmployeeConfig {
                     "Issac@gmail.com"
             );
 
-            SeatingChart[][] seats = new SeatingChart[4][4];
+            Seat[][] seats = new Seat[4][4];
             for(int floorNumber=0; floorNumber<seats.length; floorNumber++) {
                 for(int seatNumber=0; seatNumber<seats[0].length; seatNumber++) {
-                    seats[floorNumber][seatNumber] = new SeatingChart(
+                    seats[floorNumber][seatNumber] = new Seat(
                             floorNumber+1,
                             seatNumber+1
                     );
@@ -52,10 +52,10 @@ public class EmployeeConfig {
             employeeRepository.saveAll(
                     List.of(bob, alice, issac)
             );
-            List<SeatingChart> flatSeats = Arrays.stream(seats)
+            List<Seat> flatSeats = Arrays.stream(seats)
                     .flatMap(Arrays::stream)
                     .collect(Collectors.toList());
-            seatingChartRepository.saveAll(flatSeats);
+            seatRepository.saveAll(flatSeats);
         };
     }
 }
