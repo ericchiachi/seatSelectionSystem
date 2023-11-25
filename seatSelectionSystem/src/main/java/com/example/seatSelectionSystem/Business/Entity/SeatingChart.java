@@ -24,4 +24,9 @@ public class SeatingChart {
     @Getter
     @Setter
     private int seatNumber;
+
+    public SeatingChart(int floorNumber, int seatNumber) {
+        this.floorNumber = floorNumber;
+        this.seatNumber = seatNumber;
+    }
 }

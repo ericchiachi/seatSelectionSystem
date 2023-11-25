@@ -44,17 +44,11 @@ public class EmployeeService {
     public void updateEmployeeSeat(List<UpdateEmployeeSeatInput> updateEmployeeSeatInputs) {
         for(UpdateEmployeeSeatInput updateEmployeeSeatInput : updateEmployeeSeatInputs) {
             Optional<Employee> currentEmployee = employeeRepository.findById(updateEmployeeSeatInput.getEmployeeId());
-            if(currentEmployee.isPresent()) {
-                Optional<SeatingChart> currentSeatingChart = seatingChartRepository.findById(updateEmployeeSeatInput.getSeatId());
-                if(currentSeatingChart.isPresent()) {
-                    currentEmployee.get().setSeat(currentSeatingChart.get());
-                }
+            Optional<SeatingChart> currentSeatingChart = seatingChartRepository.findById(updateEmployeeSeatInput.getSeatId());
+            if(!currentEmployee.isPresent()) throw new RuntimeException("employee with id "+ updateEmployeeSeatInput.getEmployeeId() +" not found");
+            if(!currentSeatingChart.isPresent()) throw new RuntimeException("seat with id "+ updateEmployeeSeatInput.getSeatId() +" not found");
 
-            }
-            else {
-                throw new RuntimeException("employee with id "+ updateEmployeeSeatInput.getEmployeeId() +" not found");
-            }
-
+            currentEmployee.get().setSeat(currentSeatingChart.get());
             employeeRepository.save(currentEmployee.get());
         }
     }

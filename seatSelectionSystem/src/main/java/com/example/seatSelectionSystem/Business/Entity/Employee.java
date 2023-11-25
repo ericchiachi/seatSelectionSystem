@@ -38,6 +38,6 @@ public class Employee {
     public Employee(String name, String email) {
         this.name = name;
         this.email = email;
-        this.seat = new SeatingChart();
+        this.seat = null;
     }
 }
